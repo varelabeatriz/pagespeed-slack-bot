@@ -1,40 +1,19 @@
-# PageSpeed Slack Bot
+# 🤖 PageSpeed Slack Bot
 
 Bot em Node.js + TypeScript para monitorar métricas do Google PageSpeed Insights e enviar alertas para um canal do Slack quando houver mudanças relevantes.
 
-## O que ele faz
+<img width="1175" height="795" alt="image" src="https://github.com/user-attachments/assets/0d63d567-ec3b-4c58-b193-12d9dfa74586" />
 
-- consulta a API do Google PageSpeed Insights
-- monitora uma ou mais URLs
-- roda em `mobile` e/ou `desktop`
-- compara a coleta atual com a última baseline salva
-- envia mensagem no Slack quando a mudança ultrapassa os thresholds configurados
-- salva o histórico local em `src/data/history.json`
 
-## Estrutura
+## Como funciona?
 
-```txt
-src/
-  config.ts
-  index.ts
-  data/
-  services/
-    pagespeed.ts
-    slack.ts
-  types/
-    index.ts
-  utils/
-    compare.ts
-    format.ts
-    history.ts
-```
+- Configure uma ou mais URLs em .env
+- É feita uma consulta na API do Google PageSpeed Insights
+- A coleta atual é comparada com a última baseline salva
+- É feito o envio de uma mensagem no Slack quando a mudança ultrapassa os thresholds configurados
+- O histórico local fica salvo em `src/data/history.json`
 
-## Requisitos
-
-- Node.js 18+
-- chave da API do PageSpeed Insights
-- Slack Incoming Webhook
-
+  
 ## Instalação
 
 ```bash
@@ -107,20 +86,4 @@ Você pode agendar a execução com:
 - GitHub Actions
 - cron no servidor
 - Vercel Cron
-- AWS Lambda + EventBridge
 
-Exemplo simples com cron para rodar a cada 6 horas:
-
-```bash
-0 */6 * * * cd /caminho/do/projeto && /usr/bin/npm run check >> bot.log 2>&1
-```
-
-## Observação importante
-
-Esse boilerplate usa o resultado de Lighthouse retornado pela API do PageSpeed Insights. Se no futuro você quiser uma versão mais robusta, dá para evoluir para:
-
-- relatórios diários
-- alertas só após 2 ou 3 quedas seguidas
-- persistência em banco
-- métricas de campo com CrUX
-- mensagens mais ricas com Block Kit no Slack
